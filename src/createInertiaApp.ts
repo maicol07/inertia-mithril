@@ -1,5 +1,5 @@
 import m from 'mithril';
-import app from './App';
+import App from './App';
 
 // eslint-disable-next-line consistent-return
 export default async function createInertiaApp({
@@ -14,7 +14,7 @@ export default async function createInertiaApp({
 
   await resolveComponent(initialPage.component).then((initialComponent) => setup({
     el,
-    app,
+    App,
     props: {
       initialPage,
       initialComponent,
