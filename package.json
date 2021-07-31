@@ -8,10 +8,18 @@
         "inertia",
         "adapter"
     ],
-    "contributors": [
-        "Thomas Breuss <thomasbreuss@gmx.ch>",
-        "Maicol Battistini <maicolbattistini@live.it>"
+    "author": "Maicol Battistini <webmaster@maicol07.it> (https://maicol07.it)",
+    "funding": [
+        {
+            "type": "paypal",
+            "url": "https://paypal.me/maicol072001/10eur"
+        },
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/maicol07"
+        }
     ],
+    "repository": "github:maicol07/inertia-mithril",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
