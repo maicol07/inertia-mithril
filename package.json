@@ -1,23 +1,27 @@
 {
-    "name": "@tebe/inertia-mithril",
-    "version": "0.1.0",
+    "name": "@maicol07/inertia-mithril",
+    "version": "1.0",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
         "mithriljs",
-        "inertia"
+        "inertia",
+        "adapter"
     ],
     "contributors": [
-        "Thomas Breuss <thomasbreuss@gmx.ch>"
+        "Thomas Breuss <thomasbreuss@gmx.ch>",
+        "Maicol Battistini <maicolbattistini@live.it>"
     ],
     "license": "MIT",
     "main": "src/index.js",
+    "dependencies": {
+        "@inertiajs/inertia": "^0.10"
+    },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.1.9",
-        "eslint": "^6.1.0"
+        "eslint": "^7"
     },
     "peerDependencies": {
-        "@inertiajs/inertia": "^0.1.9",
-        "mithril": "^2.0.4"
+        "@inertiajs/inertia": "^0.10",
+        "mithril": "^2"
     }
 }

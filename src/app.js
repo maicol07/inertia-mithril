@@ -1,35 +1,64 @@
-import {Inertia} from '@inertiajs/inertia'
+import {Inertia, createHeadManager} from '@inertiajs/inertia'
 import m from 'mithril'
 
-const page = {
-  component: {
-    view: () => m('div')
-  },
-  props: {},
-  key: null,
+let page = {
+    component: {
+        view: () => m('div')
+    },
+    props: {},
+    key: null,
 }
 
 const app = {
-  initialPage: {
-    type: Object,
-    required: true,
-  },
-  resolveComponent: {
-    type: Function,
-    required: true,
-  },
-  transformProps: props => props,
-  oncreate: () => Inertia.init({
-    initialPage: app.initialPage,
-    resolveComponent: app.resolveComponent,
-    updatePage: (component, props, {preserveState}) => {
-      page.component = component
-      page.props = app.transformProps(props)
-      page.key = preserveState ? page.key : Date.now()
-      m.redraw()
+    name: 'Inertia',
+    props: {
+        initialPage: {
+            type: Object,
+            required: true,
+        },
+        initialComponent: {
+            type: Object,
+            required: false,
+        },
+        resolveComponent: {
+            type: Function,
+            required: true,
+        },
+        titleCallback: {
+            type: Function,
+            required: false,
+            default: title => title,
+        },
+        onHeadUpdate: {
+            type: Function,
+            required: false,
+            default: () => () => {
+            },
+        },
     },
-  }),
-  view: () => m(page.component, page.props),
-}
+    transformProps: props => props,
+    oncreate: () => {
+        const isServer = typeof window === 'undefined'
+        let headManager = createHeadManager(isServer, titleCallback, onHeadUpdate)
 
-export default app
+        if (!isServer) {
+            Inertia.init({
+                initialPage: app.props.initialPage,
+                resolveComponent: app.props.resolveComponent,
+                swapComponent: async (args) => {
+                    //page = args.page;
+                    page.component = args.component;
+                    page.key = args.preserveState ? page.key.value : Date.now()
+                },
+                updatePage: (component, props, {preserveState}) => {
+                    page.component = component
+                    page.props = app.transformProps(props)
+                    page.key = preserveState ? page.key : Date.now()
+                    m.redraw()
+                }
+            })
+        }
+    },
+    view: () => m(page.component, page.props),
+}
+export default app;
