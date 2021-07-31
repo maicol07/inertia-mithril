@@ -1,6 +1,6 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "1.0",
+    "version": "0.2",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
@@ -13,12 +13,20 @@
         "Maicol Battistini <maicolbattistini@live.it>"
     ],
     "license": "MIT",
-    "main": "src/index.js",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist"
+    ],
     "dependencies": {
         "@inertiajs/inertia": "^0.10"
     },
     "devDependencies": {
-        "eslint": "^7"
+        "@typescript-eslint/eslint-plugin": "^4",
+        "@typescript-eslint/parser": "^4",
+        "eslint": "^7",
+        "eslint-config-airbnb-base": "^14",
+        "eslint-plugin-import": "^2"
     },
     "peerDependencies": {
         "@inertiajs/inertia": "^0.10",
