@@ -34,7 +34,7 @@ export default function App({
           // page = args.page;
           // @ts-ignore
             page.component = args.component;
-            page.key = args.preserveState ? page.key.value : Date.now();
+            page.key = args.preserveState ? page.key : Date.now();
           },
           // @ts-ignore
           updatePage(component, props, { preserveState }) {
