@@ -17,8 +17,8 @@ Be sure to follow the installation instructions for the [server-side framework](
 Install the Inertia client-side adapters using NPM or Yarn.
 
 ~~~shell script
-npm install @inertiajs/inertia @tebe/inertia-mithril
-yarn add @inertiajs/inertia @tebe/inertia-mithril
+npm install @inertiajs/inertia @maicol07/inertia-mithril
+yarn add @inertiajs/inertia @maicol07/inertia-mithril
 ~~~
 
 ### Initialize app
@@ -28,15 +28,14 @@ All we're doing here is initializing the client-side framework with the base Ine
 
 ~~~js    
 import m from 'mithril'
+import { createInertiaApp } from '@maicol07/inertia-mithril'
 
-import {InertiaApp} from '@tebe/inertia-mithril'
-
-const app = document.getElementById('app')
-
-InertiaApp.initialPage = JSON.parse(app.dataset.page)
-InertiaApp.resolveComponent = name => require(`./Pages/${name}`).default
-
-m.mount(app, InertiaApp)
+createInertiaApp({
+  resolve: name => require(`./Pages/${name}`),
+  setup({ el, App, props }) {
+    m.mount(el, App(props))
+  },
+})
 ~~~ 
 
 The resolveComponent is a callback that tells Inertia how to load a page component. 
