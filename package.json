@@ -38,7 +38,6 @@
         "mithril": "^2"
     },
     "scripts": {
-        "prepublishOnly": "tsc",
         "test": ""
     }
 }
