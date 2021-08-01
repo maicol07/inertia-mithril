@@ -1,11 +1,10 @@
 // noinspection JSUnusedGlobalSymbols
 
-import { createHeadManager, Inertia, Page } from '@inertiajs/inertia';
+import { createHeadManager, Inertia } from '@inertiajs/inertia';
 import m from 'mithril';
 
 const app = {
-  // @ts-ignore
-  initialPage: Page,
+  initialPage: Object,
   isServer: false,
   resolveComponent: Function,
   titleCallback: (title) => (title),
@@ -23,6 +22,7 @@ const app = {
 
     if (!app.isServer) {
       Inertia.init({
+        // @ts-ignore
         initialPage: app.initialPage,
         resolveComponent: app.resolveComponent,
         // @ts-ignore
