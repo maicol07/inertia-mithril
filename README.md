@@ -31,9 +31,9 @@ import m from 'mithril'
 import { createInertiaApp } from '@maicol07/inertia-mithril'
 
 createInertiaApp({
-  resolve: name => require(`./Pages/${name}`),
-  setup({ el, App, props }) {
-    m.mount(el, App(props))
+  resolve: async (name) => import(`./Pages/${name}`),
+  setup({ el, app }) {
+    m.mount(el, app)
   },
 })
 ~~~ 

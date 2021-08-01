@@ -21,17 +21,11 @@
     ],
     "repository": "github:maicol07/inertia-mithril",
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist/*"
-    ],
+    "main": "src/index.js",
     "dependencies": {
         "@inertiajs/inertia": "^0.10"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^4",
-        "@typescript-eslint/parser": "^4",
         "eslint": "^7",
         "eslint-config-airbnb-base": "^14",
         "eslint-plugin-import": "^2"
