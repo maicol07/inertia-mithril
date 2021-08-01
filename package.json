@@ -1,6 +1,6 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "0.2.5",
+    "version": "0.3",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
@@ -22,6 +22,9 @@
     "repository": "github:maicol07/inertia-mithril",
     "license": "MIT",
     "main": "src/index.js",
+    "files": [
+        "src/"
+    ],
     "dependencies": {
         "@inertiajs/inertia": "^0.10"
     },
