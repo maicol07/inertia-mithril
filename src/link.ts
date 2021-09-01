@@ -15,7 +15,7 @@ export default {
     return m(as, {
       class: v.attrs.class || '',
       href,
-      onClick: (event) => {
+      onclick: (event) => {
         if (shouldIntercept(event)) {
           event.preventDefault();
           Inertia.visit(href, {
