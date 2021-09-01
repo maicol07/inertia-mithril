@@ -18,6 +18,7 @@ Install the Inertia client-side adapters using NPM or Yarn.
 
 ~~~shell script
 npm install @inertiajs/inertia @maicol07/inertia-mithril
+// or
 yarn add @inertiajs/inertia @maicol07/inertia-mithril
 ~~~
 
@@ -43,21 +44,28 @@ It receives a page name (string), and must return a component instance.
 
 Visit [Client-side setup](https://inertiajs.com/client-side-setup) to learn more.
 
+## Title & meta
+Since JavaScript apps are rendered within the document `<body>`, they are unable to render markup to the document `<head>`,
+as it's outside of their scope. To help with this, the Mithril plugin sets the page `<title>` and `<head>` elements (like <meta> tags)
+if they are passed to the page props from the backend. See [Shared Data](https://inertiajs.com/shared-data) for help about sharing data from the backend.
+
 ## Links
 
-To create links within an Inertia app you'll need to use the Inertia link component. 
+To create links within an Inertia app you'll need to use the InertiaLink component. 
 This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring. 
 This is how Inertia provides a single-page app experience.
 
 ### Creating links
 
-To create an Inertia link, use the Inertia link component. 
+To create an Inertia link, use the InertiaLink component. 
 Note, any attributes you provide will be proxied to the underlying `<a>` tag.
 
 ~~~js    
 import {InertiaLink} from '@tebe/inertia-mithril'
 
 m(InertiaLink, {href: '/'}, 'Home')
+// or use JSX:
+// <InertiaLink href="/"></InertiaLink>
 ~~~ 
     
 ### Method
