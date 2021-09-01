@@ -1,4 +1,4 @@
-import m from 'mithril';
+import { m, Mithril } from 'mithril';
 import app from './app';
 
 // eslint-disable-next-line consistent-return
@@ -22,20 +22,15 @@ export default async function createInertiaApp({
   const resolveComponent = (name: string) => Promise.resolve(resolve(name))
     .then((module) => module.default || module);
 
-  let head = [];
   await resolveComponent(initialPage.component).then(
-    (initialComponent: { view: FunctionConstructor }) => {
+    (initialComponent: { title: string, head: Mithril.VnodeDOM, view: FunctionConstructor }) => {
       app.initialPage = initialPage;
       app.page.component = initialComponent;
       // @ts-ignore
       app.resolveComponent = resolveComponent;
       app.isServer = isServer;
       app.titleCallback = title;
-      // @ts-ignore
-      app.onHeadUpdate = isServer ? (elements: Array) => {
-        head = elements;
-        return head;
-      } : null;
+
       return setup({
         el,
         app,
@@ -49,7 +44,6 @@ export default async function createInertiaApp({
       'data-page': JSON.stringify(initialPage),
     });
     return {
-      head,
       body,
     };
   }
