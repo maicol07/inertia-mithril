@@ -5,11 +5,11 @@ export default {
   view: (v) => {
     const method = v.attrs.method.toLowerCase() || 'get';
     const as = v.attrs.as || 'a';
-    const [href, data] = mergeDataIntoQueryString(method, v.attrs.href, v.attrs.data)
+    const [href, data] = mergeDataIntoQueryString(method, v.attrs.href, v.attrs.data);
 
     if (as === 'a' && method !== 'get') {
       // eslint-disable-next-line no-console
-      console.warn(`Creating POST/PUT/PATCH/DELETE <a> links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues.\n\nPlease specify a more appropriate element using the "as" attribute. For example:\n\n<inertia-link href="${href}" method="${method}" as="button">...</inertia-link>`)
+      console.warn(`Creating POST/PUT/PATCH/DELETE <a> links is discouraged as it causes "Open Link in New Tab/Window" accessibility issues.\n\nPlease specify a more appropriate element using the "as" attribute. For example:\n\n<inertia-link href="${href}" method="${method}" as="button">...</inertia-link>`);
     }
 
     return m(as, {
