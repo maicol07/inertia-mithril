@@ -1,6 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-import { createHeadManager, Inertia } from '@inertiajs/inertia';
+import { Inertia } from '@inertiajs/inertia';
 import m from 'mithril';
 
 const app = {
@@ -8,18 +8,17 @@ const app = {
   isServer: false,
   resolveComponent: Function,
   titleCallback: (title) => (title),
-  onHeadUpdate: Function,
   page: {
     component: {
       view: () => m('div'),
     },
-    props: {},
+    props: {
+      title: '',
+      head: null,
+    },
     key: null,
   },
-  onCreate: () => {
-    // @ts-ignore
-    createHeadManager(app.isServer, app.titleCallback, app.onHeadUpdate);
-
+  oncreate: () => {
     if (!app.isServer) {
       Inertia.init({
         // @ts-ignore
@@ -35,6 +34,13 @@ const app = {
           app.page = page;
           // @ts-ignore
           app.page.component = component;
+          if (app.page.props.head) {
+            m.render(document.head, app.page.props.head);
+          }
+          // Title callback
+          if (app.page.props.title) {
+            document.title = app.titleCallback(app.page.props.title);
+          }
           app.page.key = preserveState ? app.page.key : Date.now();
           m.redraw();
         },
