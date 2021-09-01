@@ -7,8 +7,7 @@
         "mithriljs",
         "inertia",
         "adapter"
-    ],
-    "author": "Maicol Battistini <webmaster@maicol07.it> (https://maicol07.it)",
+    ],    "author": "Maicol Battistini <webmaster@maicol07.it> (https://maicol07.it)",
     "funding": [
         {
             "type": "paypal",
@@ -30,18 +29,20 @@
         "@inertiajs/inertia": "^0.10"
     },
     "devDependencies": {
+        "@babel/runtime": "^7.15.3",
         "@typescript-eslint/parser": "^4",
         "@typescript-eslint/eslint-plugin": "^4",
         "eslint": "^7",
         "eslint-config-airbnb-base": "^14",
-        "eslint-plugin-import": "^2"
+        "eslint-plugin-import": "^2",
+        "process": "^0.11.10"
     },
     "peerDependencies": {
         "@inertiajs/inertia": "^0.10",
         "mithril": "^2"
     },
     "scripts": {
-        "prepublishOnly": "tsc",
-        "test": ""
+        "prepublishOnly": "npm run compile",
+        "compile": "tsc"
     }
 }
