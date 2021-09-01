@@ -25,13 +25,13 @@ const app = {
         initialPage: app.initialPage,
         resolveComponent: app.resolveComponent,
         // @ts-ignore
-        swapComponent: ({
+        swapComponent: async ({
           component,
           page,
           preserveState,
         }) => {
           // @ts-ignore
-          app.page = page;
+          app.page = { ...page };
           // @ts-ignore
           app.page.component = component;
           if (app.page.props.head) {
