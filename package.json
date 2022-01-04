@@ -1,13 +1,14 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
         "mithriljs",
         "inertia",
         "adapter"
-    ],    "author": "Maicol Battistini <webmaster@maicol07.it> (https://maicol07.it)",
+    ],
+    "author": "Maicol Battistini <webmaster@maicol07.it> (https://maicol07.it)",
     "funding": [
         {
             "type": "paypal",
@@ -26,7 +27,9 @@
         "dist/*"
     ],
     "dependencies": {
-        "@inertiajs/inertia": "^0.10"
+        "@inertiajs/inertia": "^0.10.1",
+        "mithril": "^2.0.4",
+        "typescript": "^4.5.4"
     },
     "devDependencies": {
         "@babel/runtime": "^7.15.3",
@@ -38,8 +41,8 @@
         "process": "^0.11.10"
     },
     "peerDependencies": {
-        "@inertiajs/inertia": "^0.10",
-        "mithril": "^2"
+        "@inertiajs/inertia": ">=0.10.1",
+        "mithril": ">=2.0.8"
     },
     "scripts": {
         "prepublishOnly": "npm run compile",

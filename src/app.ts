@@ -1,4 +1,4 @@
-// noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
 import { Inertia } from '@inertiajs/inertia';
 import m from 'mithril';
@@ -6,7 +6,8 @@ import m from 'mithril';
 const app = {
   initialPage: Object,
   isServer: false,
-  resolveComponent: Function,
+  // eslint-disable-next-line no-unused-vars
+  resolveComponent: (name: string) => Promise.resolve(),
   titleCallback: (title) => (title),
   page: {
     component: {

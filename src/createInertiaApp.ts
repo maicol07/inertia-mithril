@@ -12,8 +12,9 @@ export default async function createInertiaApp({
   id: string,
   resolve: Function,
   setup: Function,
-  title: FunctionConstructor,
-  page: Object
+  // eslint-disable-next-line no-unused-vars
+  title: (t: string) => string,
+  page?: Object
 }) {
   const isServer = typeof window === 'undefined';
   const el = isServer ? null : document.getElementById(id);
@@ -26,7 +27,6 @@ export default async function createInertiaApp({
     (initialComponent: { title: string, head: Mithril.VnodeDOM, view: FunctionConstructor }) => {
       app.initialPage = initialPage;
       app.page.component = initialComponent;
-      // @ts-ignore
       app.resolveComponent = resolveComponent;
       app.isServer = isServer;
       app.titleCallback = title;
