@@ -9,7 +9,7 @@ export default async function createInertiaApp({
   title,
   page,
 }: {
-  id: string,
+  id?: string,
   resolve: Function,
   setup: Function,
   // eslint-disable-next-line no-unused-vars
