@@ -1,50 +1,68 @@
-import { m, Mithril } from 'mithril';
-import app from './app';
+import {Page} from '@inertiajs/inertia';
+import m, {ChildArray, ClassComponent, Vnode} from 'mithril';
+
+import InertiaApp, {AppAttributes} from './App';
 
 // eslint-disable-next-line consistent-return
 export default async function createInertiaApp({
-  id = 'app',
-  resolve,
-  setup,
-  title,
-  page,
+  id = 'app', resolve, setup, title, /* visitOptions, */ page, render
 }: {
   id?: string,
-  resolve: Function,
-  setup: Function,
+  resolve: (name: string) => Promise<ClassComponent | {default: ClassComponent}>,
+  setup: ({el, App, props}: {
+    el?: HTMLElement | null,
+    App: typeof InertiaApp,
+    props?: AppAttributes
+  }) => void | Vnode,
   // eslint-disable-next-line no-unused-vars
-  title: (t: string) => string,
-  page?: Object
+  title: (title: string) => string,
+  page?: Page,
+  // [FOR 0.12] visitOptions?: Record<string, any>,
+  render?: (vnode: m.Vnode | m.Vnode[]) => Promise<string>
 }) {
   const isServer = typeof window === 'undefined';
-  const el = isServer ? null : document.getElementById(id);
-  const initialPage = page || JSON.parse(el.dataset.page);
+  const element: undefined | HTMLElement | null = isServer ? undefined : document.querySelector<HTMLElement>(`#${id}`);
 
-  const resolveComponent = (name: string) => Promise.resolve(resolve(name))
-    .then((module) => module.default || module);
+  let initialPage = page;
+  if (element && element.dataset.page) {
+    initialPage = JSON.parse(element.dataset.page) as Page;
+  }
+  initialPage = initialPage as Page;
 
-  await resolveComponent(initialPage.component).then(
-    (initialComponent: { title: string, head: Mithril.VnodeDOM, view: FunctionConstructor }) => {
-      app.initialPage = initialPage;
-      app.page.component = initialComponent;
-      app.resolveComponent = resolveComponent;
-      app.isServer = isServer;
-      app.titleCallback = title;
+  const resolveComponent = async (name: string) => {
+    const module = await Promise.resolve(resolve(name));
 
-      return setup({
-        el,
-        app,
-      });
-    },
-  );
+    return 'default' in module ? module.default : module;
+  };
 
-  if (isServer) {
-    const body = await m('div', {
-      id,
-      'data-page': JSON.stringify(initialPage),
-    });
-    return {
-      body,
-    };
+  let head: ChildArray = [];
+
+  const initialComponent = await resolveComponent(initialPage.component);
+
+  const mithrilApp = setup({
+    el: element,
+    App: InertiaApp,
+    props: {
+      initialPage,
+      initialComponent,
+      resolveComponent,
+      titleCallback: title,
+      onHeadUpdate: isServer ? (elements: ChildArray) => {
+        head = elements;
+      } : undefined
+      // [FOR 0.12] visitOptions
+    }
+  });
+
+  if (isServer && render) {
+    const body = await render(
+      // @ts-ignore
+      m('div', {
+        id,
+        'data-page': JSON.stringify(initialPage)
+      }, mithrilApp)
+    );
+
+    return {head, body};
   }
 }

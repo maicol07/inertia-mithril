@@ -1,6 +1,6 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
@@ -27,25 +27,20 @@
         "dist/*"
     ],
     "dependencies": {
-        "@inertiajs/inertia": "^0.10.1",
-        "mithril": "^2.0.4",
-        "typescript": "^4.5.4"
+        "@inertiajs/inertia": "^0.11.0",
+        "mithril": "^2.0.4"
     },
     "devDependencies": {
-        "@babel/runtime": "^7.15.3",
-        "@typescript-eslint/parser": "^4",
-        "@typescript-eslint/eslint-plugin": "^4",
-        "eslint": "^7",
-        "eslint-config-airbnb-base": "^14",
-        "eslint-plugin-import": "^2",
-        "process": "^0.11.10"
+        "@maicol07/eslint-config": "^2.1.5",
+        "@types/mithril": "^2.0.9",
+        "typescript": "^4.5.5"
     },
     "peerDependencies": {
         "@inertiajs/inertia": ">=0.10.1",
-        "mithril": ">=2.0.8"
+        "mithril": ">=2.0.4"
     },
     "scripts": {
-        "prepublishOnly": "npm run compile",
-        "compile": "tsc"
+        "prepublishOnly": "npm run build",
+        "build": "tsc"
     }
 }

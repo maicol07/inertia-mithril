@@ -16,7 +16,7 @@ Be sure to follow the installation instructions for the [server-side framework](
 
 Install the Inertia client-side adapters using NPM or Yarn.
 
-~~~shell script
+~~~shell
 npm install @inertiajs/inertia @maicol07/inertia-mithril
 // or
 yarn add @inertiajs/inertia @maicol07/inertia-mithril
@@ -33,26 +33,33 @@ import { createInertiaApp } from '@maicol07/inertia-mithril'
 
 createInertiaApp({
   resolve: async (name) => import(`./Pages/${name}`),
-  setup({ el, app }) {
-    m.mount(el, app)
+  setup({ el, App, props }) {
+    m.mount(el, {
+        view: () => m(App, props) // or with JSX: m.mount(el, <App {...props}/>)
+    });
   },
 })
 ~~~
 
-The resolveComponent is a callback that tells Inertia how to load a page component.
+The `resolveComponent` is a callback that tells Inertia how to load a page component.
 It receives a page name (string), and must return a component instance.
 
 Visit [Client-side setup](https://inertiajs.com/client-side-setup) to learn more.
 
+## Shared data
+
+To share data between server and Mithril, it's pretty simple:
+
+1. Follow the [Shared data](https://inertiajs.com/shared-data) instructions for the server
+2. You can access data via the `vnode.attrs.page.props` in your page component.
+
 ## Title & meta
 
-Since JavaScript apps are rendered within the document `<body>`, they are unable to render markup to the document `<head>`,
-as it's outside of their scope. To help with this, the Mithril plugin sets the page `<title>` and `<head>` elements (like <meta> tags)
-if they are passed to the page props from the backend. See [Shared Data](https://inertiajs.com/shared-data) for help about sharing data from the backend.
+_To be developed_
 
 ## Links
 
-To create links within an Inertia app you'll need to use the InertiaLink component.
+To create links within an Inertia app you'll need to use the `InertiaLink` component.
 This is a light wrapper around a standard anchor link that intercepts click events and prevents full page reloads from occurring.
 This is how Inertia provides a single-page app experience.
 

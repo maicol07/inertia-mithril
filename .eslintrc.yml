@@ -1,0 +1,2 @@
+extends:
+    - "@maicol07/eslint-config"
