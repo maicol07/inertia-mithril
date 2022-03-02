@@ -12,7 +12,7 @@ export default async function createInertiaApp({
   setup: ({el, App, props}: {
     el?: HTMLElement | null,
     App: typeof InertiaApp,
-    props?: AppAttributes
+    props: AppAttributes
   }) => void | Vnode,
   // eslint-disable-next-line no-unused-vars
   title: (title: string) => string,
@@ -31,8 +31,7 @@ export default async function createInertiaApp({
 
   const resolveComponent = async (name: string) => {
     const module = await Promise.resolve(resolve(name));
-
-    return 'default' in module ? module.default : module;
+    return ('default' in module) ? module.default : module;
   };
 
   let head: ChildArray = [];
@@ -47,9 +46,11 @@ export default async function createInertiaApp({
       initialComponent,
       resolveComponent,
       titleCallback: title,
-      onHeadUpdate: isServer ? (elements: ChildArray) => {
-        head = elements;
-      } : undefined
+      onHeadUpdate: isServer
+        ? (elements: ChildArray) => {
+          head = elements;
+        }
+        : undefined
       // [FOR 0.12] visitOptions
     }
   });

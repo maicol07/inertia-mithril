@@ -34,6 +34,10 @@ import { createInertiaApp } from '@maicol07/inertia-mithril'
 createInertiaApp({
   resolve: async (name) => import(`./Pages/${name}`),
   setup({ el, App, props }) {
+    if (!el) {
+      throw new Error("No mounting HTMLElement found");
+    }
+
     m.mount(el, {
         view: () => m(App, props) // or with JSX: m.mount(el, <App {...props}/>)
     });
