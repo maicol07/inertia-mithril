@@ -1,7 +1,13 @@
 import {Page} from '@inertiajs/inertia';
-import m, {ChildArray, ClassComponent, Vnode} from 'mithril';
+import {ChildArray, ClassComponent, Vnode} from 'mithril';
 
 import InertiaApp, {AppAttributes} from './App';
+
+export type Setup = ({el, App, props}: {
+  el?: HTMLElement | null,
+  App: typeof InertiaApp,
+  props: AppAttributes
+}) => void | Vnode<AppAttributes>;
 
 // eslint-disable-next-line consistent-return
 export default async function createInertiaApp({
@@ -9,16 +15,11 @@ export default async function createInertiaApp({
 }: {
   id?: string,
   resolve: (name: string) => Promise<ClassComponent | {default: ClassComponent}>,
-  setup: ({el, App, props}: {
-    el?: HTMLElement | null,
-    App: typeof InertiaApp,
-    props: AppAttributes
-  }) => void | Vnode,
-  // eslint-disable-next-line no-unused-vars
+  setup: Setup,
   title: (title: string) => string,
   page?: Page,
   // [FOR 0.12] visitOptions?: Record<string, any>,
-  render?: (vnode: m.Vnode | m.Vnode[]) => Promise<string>
+  render?: (vnode: Vnode<AppAttributes>) => Promise<string>
 }) {
   const isServer = typeof window === 'undefined';
   const element: undefined | HTMLElement | null = isServer ? undefined : document.querySelector<HTMLElement>(`#${id}`);
