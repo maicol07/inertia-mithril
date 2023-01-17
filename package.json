@@ -27,16 +27,16 @@
         "dist/*"
     ],
     "dependencies": {
-        "@inertiajs/inertia": "^0.11.0",
-        "mithril": "^2.0.4"
+        "@inertiajs/inertia": "^0.11.1",
+        "mithril": "^2.2.2"
     },
     "devDependencies": {
-        "@maicol07/eslint-config": "^2.1.5",
-        "@types/mithril": "^2.0.9",
-        "typescript": "^4.6.2"
+        "@maicol07/eslint-config": "^2.2.2",
+        "@types/mithril": "^2.0.12",
+        "typescript": "^4.9.4"
     },
     "peerDependencies": {
-        "@inertiajs/inertia": ">=0.10.1",
+        "@inertiajs/inertia": ">=0.11.0",
         "mithril": ">=2.0.4"
     },
     "scripts": {
