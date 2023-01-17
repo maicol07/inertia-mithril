@@ -56,14 +56,8 @@ export default async function createInertiaApp({
     }
   });
 
-  if (isServer && render) {
-    const body = await render(
-      // @ts-ignore
-      m('div', {
-        id,
-        'data-page': JSON.stringify(initialPage)
-      }, mithrilApp)
-    );
+  if (isServer && render && mithrilApp) {
+    const body = await render(mithrilApp);
 
     return {head, body};
   }
