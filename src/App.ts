@@ -1,9 +1,15 @@
 import {
-  createHeadManager, Inertia, Page, PageResolver
-} from '@inertiajs/inertia';
+  createHeadManager,
+  Page,
+  PageResolver,
+  router
+} from '@inertiajs/core';
 import m, {
   ChildArray,
-  ClassComponent, Component, Vnode, VnodeDOM
+  ClassComponent,
+  Component,
+  Vnode,
+  VnodeDOM
 } from 'mithril';
 
 export interface AppAttributes {
@@ -16,7 +22,7 @@ export interface AppAttributes {
 }
 
 export interface ComponentAttributes {
-  page?: Page
+  page?: Page;
 }
 
 export default class App implements ClassComponent<AppAttributes> {
@@ -36,7 +42,7 @@ export default class App implements ClassComponent<AppAttributes> {
   }
 
   oncreate(vnode: VnodeDOM<AppAttributes>): any {
-    Inertia.init({
+    router.init({
       initialPage: vnode.attrs.initialPage,
       resolveComponent: vnode.attrs.resolveComponent,
       swapComponent: async ({component, page, preserveState}) => {
@@ -47,17 +53,9 @@ export default class App implements ClassComponent<AppAttributes> {
         // eslint-disable-next-line @typescript-eslint/await-thenable
         await m.redraw();
       }
-      // [FOR 0.12] visitOptions: vnode.attrs.visitOptions || (() => {})
     });
 
-    /* For 0.12:
-
-    Inertia.on('navigate', () => {
-      if (this.headManager) {
-        this.headManager.forceUpdate();
-      }
-    });
-    */
+    router.on('navigate', () => this.headManager?.forceUpdate());
   }
 
   view(vnode: Vnode<AppAttributes>) {

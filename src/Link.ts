@@ -1,20 +1,24 @@
 import {
-  GlobalEventCallback, Inertia, mergeDataIntoQueryString, Method, shouldIntercept
-} from '@inertiajs/inertia';
-import {FormDataConvertible} from '@inertiajs/inertia/types/types';
+  GlobalEventCallback,
+  mergeDataIntoQueryString,
+  Method,
+  router,
+  shouldIntercept
+} from '@inertiajs/core';
+import {FormDataConvertible} from '@inertiajs/core/types';
 import m, {ClassComponent, Vnode} from 'mithril';
 
 export interface LinkAttributes {
-  href: string,
   as?: string,
-  method?: string,
   data?: Record<string, FormDataConvertible>,
-  class?: string,
+  href: string,
+  method?: string,
+  headers?: Record<string, string>,
+  onclick?: (event: MouseEvent) => void,
   replace?: boolean,
   preserveScroll?: boolean,
   preserveState?: boolean,
   only?: string[],
-  headers?: Record<string, string>,
   onCancelToken?: GlobalEventCallback<'cancel'>,
   onBefore?: GlobalEventCallback<'before'>,
   onStart?: GlobalEventCallback<'start'>,
@@ -37,12 +41,12 @@ export default class InertiaLink implements ClassComponent<LinkAttributes> {
     }
 
     return m(as, {
-      class: vnode.attrs.class || '',
+      ...vnode.attrs,
       href,
       onclick: (event: KeyboardEvent) => {
         if (shouldIntercept(event)) {
           event.preventDefault();
-          Inertia.visit(href, {
+          router.visit(href, {
             data,
             method,
             replace: vnode.attrs.replace || false,

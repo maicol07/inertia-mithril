@@ -1,6 +1,6 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "0.5.3",
+    "version": "1.0.0",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
@@ -27,7 +27,7 @@
         "dist/*"
     ],
     "dependencies": {
-        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/core": "^1",
         "mithril": "^2.2.2"
     },
     "devDependencies": {
@@ -36,8 +36,10 @@
         "typescript": "^4.9.4"
     },
     "peerDependencies": {
-        "@inertiajs/inertia": ">=0.11.0",
         "mithril": ">=2.0.4"
+    },
+    "suggest": {
+        "mithril-node-render": "Allows you to render your Mithril application on the server (SSR)."
     },
     "scripts": {
         "prepublishOnly": "npm run build",
