@@ -1,5 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-export {default as createInertiaApp} from './createInertiaApp';
-export {default as Link} from './Link';
+export {AppAttributes, ComponentAttributes} from './App';
+export {default as createInertiaApp, SetupOptions} from './createInertiaApp';
+export {default as Link, LinkAttributes} from './Link';
 export {router} from '@inertiajs/core';
