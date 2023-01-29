@@ -1,6 +1,6 @@
 {
     "name": "@maicol07/inertia-mithril",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "The Mithril.js adapter for Inertia.js",
     "keywords": [
         "mithril",
