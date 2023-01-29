@@ -1,6 +1,7 @@
 import {
   createHeadManager,
   Page,
+  PageProps,
   PageResolver,
   router
 } from '@inertiajs/core';
@@ -8,6 +9,7 @@ import m, {
   ChildArray,
   ClassComponent,
   Component,
+  ComponentTypes,
   Vnode,
   VnodeDOM
 } from 'mithril';
@@ -21,12 +23,13 @@ export interface AppAttributes {
   // [FOR 0.12] visitOptions: Record<string, any> | undefined
 }
 
-export interface ComponentAttributes {
-  page?: Page;
+export interface ComponentAttributes<SharedProperties = PageProps> {
+  page?: Page<SharedProperties>;
 }
 
-export default class App implements ClassComponent<AppAttributes> {
-  component: Component<ComponentAttributes> | ClassComponent<ComponentAttributes> | undefined;
+export default class App<SharedProperties = PageProps> implements ClassComponent<AppAttributes> {
+  component: ComponentTypes<ComponentAttributes<SharedProperties>> | undefined;
+
   page: Page | undefined;
   key: number | undefined;
   headManager: ReturnType<typeof createHeadManager> | undefined;
@@ -60,6 +63,7 @@ export default class App implements ClassComponent<AppAttributes> {
 
   view(vnode: Vnode<AppAttributes>) {
     if (this.page && this.component) {
+      // @ts-ignore - FALSE POSITIVE (component is a component and not a string)
       return m(this.component, {page: this.page});
     }
 
