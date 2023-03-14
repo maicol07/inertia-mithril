@@ -16,13 +16,13 @@ type HeadManagerOnUpdate = (elements: string[]) => void;
 // TODO: When shipped, replace with: Inertia.HeadManagerTitleCallback
 type HeadManagerTitleCallback = (title: string) => string;
 
-type AppType<SharedProperties = PageProps> = Component<
+type AppType<SharedProperties extends PageProps = PageProps> = Component<
 /* {
   children?: (properties: {Component: ComponentType; key: Key; props: Page<SharedProperties>['props']}) => ReactNode
 } & */ SetupOptions<unknown, SharedProperties>['props']
 >;
 
-export type SetupOptions<ElementType, SharedProperties> = {
+export type SetupOptions<ElementType, SharedProperties extends PageProps> = {
   el: ElementType
   App: AppType
   props: {
@@ -40,7 +40,7 @@ type BaseInertiaAppOptions = {
 };
 
 type CreateInertiaAppSetupReturnType = Vnode<AppAttributes> | void;
-type InertiaAppOptionsForCSR<SharedProperties> = BaseInertiaAppOptions & {
+type InertiaAppOptionsForCSR<SharedProperties extends PageProps = PageProps> = BaseInertiaAppOptions & {
   id?: string
   page?: Page | string
   render?: undefined
@@ -56,7 +56,7 @@ type InertiaAppOptionsForCSR<SharedProperties> = BaseInertiaAppOptions & {
 };
 
 type CreateInertiaAppSSRContent = {head: string[]; body: string};
-type InertiaAppOptionsForSSR<SharedProperties> = BaseInertiaAppOptions & {
+type InertiaAppOptionsForSSR<SharedProperties extends PageProps = PageProps> = BaseInertiaAppOptions & {
   id: undefined
   page: Page | string
   render?: (vnode: Vnode<{
@@ -68,14 +68,14 @@ type InertiaAppOptionsForSSR<SharedProperties> = BaseInertiaAppOptions & {
 };
 
 // eslint-disable-next-line consistent-return
-export default async function createInertiaApp<SharedProperties = PageProps>(
+export default async function createInertiaApp<SharedProperties extends PageProps = PageProps>(
   options: InertiaAppOptionsForCSR<SharedProperties>,
 ): Promise<CreateInertiaAppSetupReturnType>;
-export default async function createInertiaApp<SharedProperties = PageProps>(
+export default async function createInertiaApp<SharedProperties extends PageProps = PageProps>(
   options: InertiaAppOptionsForSSR<SharedProperties>,
 ): Promise<CreateInertiaAppSSRContent>;
 // eslint-disable-next-line consistent-return
-export default async function createInertiaApp<SharedProperties = PageProps>({
+export default async function createInertiaApp<SharedProperties extends PageProps = PageProps>({
   id = 'app',
   resolve,
   setup,

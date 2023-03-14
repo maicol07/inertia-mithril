@@ -23,11 +23,11 @@ export interface AppAttributes {
   // [FOR 0.12] visitOptions: Record<string, any> | undefined
 }
 
-export interface ComponentAttributes<SharedProperties = PageProps> {
+export interface ComponentAttributes<SharedProperties extends PageProps = PageProps> {
   page?: Page<SharedProperties>;
 }
 
-export default class App<SharedProperties = PageProps> implements ClassComponent<AppAttributes> {
+export default class App<SharedProperties extends PageProps = PageProps> implements ClassComponent<AppAttributes> {
   component: ComponentTypes<ComponentAttributes<SharedProperties>> | undefined;
 
   page: Page | undefined;
