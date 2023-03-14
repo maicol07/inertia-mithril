@@ -31,7 +31,7 @@ export interface LinkAttributes {
 
 export default class InertiaLink implements ClassComponent<LinkAttributes> {
   view(vnode: Vnode<LinkAttributes>) {
-    const method: Method = vnode.attrs.method?.toLowerCase() as Method || Method.GET;
+    const method: Method = vnode.attrs.method?.toLowerCase() as Method ?? 'get';
     const as = vnode.attrs.as || 'a';
     const [href, data] = mergeDataIntoQueryString(method, vnode.attrs.href, vnode.attrs.data ?? {});
 
